@@ -41,6 +41,3 @@ or:
 
     # pacman -Rsc retrosmart-kdeplasma-welcomescreen
 
-
-For a successful compilation you need *imagemagick* for generate PNGs from XPMs
-and *xcursorgen* for generate the cursors from the PNGs.
