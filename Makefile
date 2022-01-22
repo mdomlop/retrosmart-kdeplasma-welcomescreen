@@ -3,26 +3,29 @@ DESTDIR = ''
 THEMENAME = com.github.mdomlop.retrosmart
 
 default:
-	mkdir $(THEMENAME)
-	cp -r src/* LICENSE AUTHORS $(THEMENAME)/
+	cp -r src/$(THEMENAME) src/$(THEMENAME)-unix .
+	cp LICENSE AUTHORS $(THEMENAME)/
+	cp LICENSE AUTHORS $(THEMENAME)-unix/
 
 clean:
-	rm -rf $(THEMENAME) *.tar.xz
+	rm -rf $(THEMENAME) $(THEMENAME)-unix *.pkg.tar.xz *.pkg.tar.zst
 
-install:
-	install -d -m 755 $(DESTDIR)/$(PREFIX)/share/plasma/look-and-feel/$(THEMENAME)
-	cp -r src/* $(DESTDIR)/$(PREFIX)/share/plasma/look-and-feel/$(THEMENAME)/
-	chmod -R u+rwX,go+rX $(DESTDIR)/$(PREFIX)/share/plasma/look-and-feel/$(THEMENAME)/
+install: default
+	install -d -m 755 $(DESTDIR)/$(PREFIX)/share/plasma/look-and-feel/
+	cp -r $(THEMENAME)/ $(THEMENAME)-unix/ $(DESTDIR)/$(PREFIX)/share/plasma/look-and-feel/
+	chmod -R u+rwX,go+rX $(DESTDIR)/$(PREFIX)/share/plasma/look-and-feel/$(THEMENAME)/ $(DESTDIR)/$(PREFIX)/share/plasma/look-and-feel/$(THEMENAME)-unix/
 
 uninstall:
 	rm -rf  $(DESTDIR)/$(PREFIX)/share/plasma/look-and-feel/$(THEMENAME)/
+	rm -rf  $(DESTDIR)/$(PREFIX)/share/plasma/look-and-feel/$(THEMENAME)-unix/
 
-user_install:
-	mkdir -p ~/.local/share/plasma/look-and-feel/$(THEMENAME)/
-	cp -r src/* ~/.local/share/plasma/look-and-feel/$(THEMENAME)/
+user_install: default
+	install -d -m 755 ~/.local/share/plasma/look-and-feel
+	cp -r $(THEMENAME)/ $(THEMENAME)-unix/ ~/.local/share/plasma/look-and-feel/
 
 user_uninstall:
 	rm -rf ~/.local/share/plasma/look-and-feel/$(THEMENAME)/
+	rm -rf ~/.local/share/plasma/look-and-feel/$(THEMENAME)-unix/
 
 arch_pkg:
 	makepkg -d

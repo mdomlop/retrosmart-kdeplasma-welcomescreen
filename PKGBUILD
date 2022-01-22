@@ -7,7 +7,7 @@ _pkgver_month=12
 _pkgver_day=18
 
 pkgname=retrosmart-kdeplasma-welcomescreen
-pkgver=1.0
+pkgver=1.1
 pkgrel=1
 pkgdesc='A retrosmart look welcome screen for KDE Plasma.'
 url=https://github.com/mdomlop/$pkgname
